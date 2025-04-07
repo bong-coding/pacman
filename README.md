@@ -17,7 +17,7 @@ Pacman은 미로를 탐색하여 목표 지점까지 도달해야 하며, 우리
 
 ---
 
-## ✅ Q1: 깊이 우선 탐색 (Depth-First Search)
+## Q1: 깊이 우선 탐색 (Depth-First Search)
 
 - 함수명: `depthFirstSearch(problem)`
 - 자료구조: Stack (후입선출)
@@ -28,7 +28,7 @@ Pacman은 미로를 탐색하여 목표 지점까지 도달해야 하며, 우리
 
 ---
 
-## ✅ Q2: 너비 우선 탐색 (Breadth-First Search)
+## Q2: 너비 우선 탐색 (Breadth-First Search)
 
 - **함수명**: `breadthFirstSearch(problem)`
 - **자료구조**: `Queue` (선입선출 방식)
@@ -41,7 +41,7 @@ Pacman은 미로를 탐색하여 목표 지점까지 도달해야 하며, 우리
 
 ---
 
-## ✅ Q3: 비용 함수 기반 탐색 (Uniform Cost Search)
+## Q3: 비용 함수 기반 탐색 (Uniform Cost Search)
 
 - **함수명**: `uniformCostSearch(problem)`
 - **자료구조**: `PriorityQueue` (누적 cost 기준)
@@ -54,7 +54,7 @@ Pacman은 미로를 탐색하여 목표 지점까지 도달해야 하며, 우리
 
 ---
 
-## ✅ Q4: A\* 탐색 (A\* Search)
+## Q4: A\* 탐색 (A\* Search)
 
 - **함수명**: `aStarSearch(problem, heuristic)`
 - **자료구조**: `PriorityQueue`  
