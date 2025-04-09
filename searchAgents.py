@@ -296,15 +296,18 @@ class CornersProblem(search.SearchProblem):
         space)
         """
         "*** YOUR CODE HERE ***"
-        util.raiseNotDefined()
+        visit = (False,False,False,False)
+        return (self.startingPosition,visit)
+        # util.raiseNotDefined()
 
     def isGoalState(self, state: Any):
         """
         Returns whether this search state is a goal state of the problem.
         """
         "*** YOUR CODE HERE ***"
-        util.raiseNotDefined()
-
+        # util.raiseNotDefined()
+        position,visit = state
+        return all(visit)
     def getSuccessors(self, state: Any):
         """
         Returns successor states, the actions they require, and a cost of 1.
@@ -326,7 +329,21 @@ class CornersProblem(search.SearchProblem):
             #   hitsWall = self.walls[nextx][nexty]
 
             "*** YOUR CODE HERE ***"
+            current_position,visit = state
+            x,y = current_position
+            for action in [Directions.NORTH, Directions.SOUTH, Directions.EAST, Directions.WEST]:
+                dx, dy = Actions.directionToVector(action)
+                nextx,nexty = int(x+dx), int(y+dy)
 
+                if not self.walls[nextx][nexty]:
+                    new_position = (nextx,nexty)
+                    new_visit = list(visit)
+
+                    if new_position in self.corners:
+                        c_index = self.corners.index(new_position)
+                        new_visit[c_index] = True
+
+                    successors.append(((new_position,tuple(new_visit)),action,1))
         self._expanded += 1 # DO NOT CHANGE
         return successors
 
@@ -360,8 +377,25 @@ def cornersHeuristic(state: Any, problem: CornersProblem):
     corners = problem.corners # These are the corner coordinates
     walls = problem.walls # These are the walls of the maze, as a Grid (game.py)
 
+    # 반환값이 목표값 최단 경로의 비용보다 작아야한다
+    # 탐색하지 않은 코너, 모든 코너 탐색했다면 0, 현재에서 탐색 안 한 모든 코너 계산후 
+    # 가장 먼 거리를 휴리스틱
+
+    # 탐색 안 한 코너 찾고
+    # 각 코너 거리 계산
+    # 남아 있는 코너중 먼거리 반환
     "*** YOUR CODE HERE ***"
-    return 0 # Default to trivial solution
+    cur_position, c_visit = state
+    novisit_c = [corner for i, corner in enumerate(corners)
+    if not c_visit[i]]
+
+    if not novisit_c:
+        return 0
+    distance = [util.manhattanDistance(cur_position,corner)
+    for corner in novisit_c]
+    
+
+    return max(distance) # Default to trivial solution
 
 class AStarCornersAgent(SearchAgent):
     "A SearchAgent for FoodSearchProblem using A* and your foodHeuristic"
