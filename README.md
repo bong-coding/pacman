@@ -86,6 +86,55 @@ Pacman은 미로를 탐색하여 목표 지점까지 도달해야 하며, 우리
 
 ---
 
+## Q7: 모든 음식 먹기 (FoodSearchProblem)
+
+**클래스**: `FoodSearchProblem`  
+**설명**:
+
+- Pacman이 보드 위의 **모든 음식(점)** 을 먹는 경로를 찾는 문제입니다.
+- 상태(`state`)는 `(pacmanPosition, foodGrid)`로 구성되며, `foodGrid`는 남은 음식의 위치를 `True/False`로 나타냅니다.
+- Goal은 **모든 음식**이 사라진 상태(`foodGrid.count() == 0`)입니다.
+
+### FoodSearchProblem 휴리스틱
+
+- **함수**: `foodHeuristic(state, problem)`
+- **구현 방법 (예시)**:
+  1. **가장 먼 음식**까지의 “mazeDistance” (벽 고려 BFS)를 사용
+     - `(position, food)` 쌍에 대해 `mazeDistance`를 **캐싱**하여 중복 계산 방지
+     - 그 중 **가장 멀리 있는 음식**까지 거리를 휴리스틱으로 삼음
+  2. **MST(최소 신장 트리) 휴리스틱**
+     - 모든 음식 + 현재 위치를 노드로 보고, 노드 쌍의 `mazeDistance`로 간선 가중치를 구성
+     - MST의 총 가중치를 휴리스틱으로 사용 (확장 노드 수 크게 감소)
+
+---
+
+## Q8: ClosestDotSearchAgent (가장 가까운 음식부터 먹기)
+
+**클래스**: `ClosestDotSearchAgent`  
+**설명**:
+
+- 모든 음식을 먹을 때까지, **“현재에서 가장 가까운 음식”** 으로 가는 경로를 **반복**적으로 탐색해 이동합니다.
+- 최적(총거리 최소)은 아니지만, 간단히 구현 가능.
+- `findPathToClosestDot`를 통해 **“어떤 음식이든 도착하면 goal”** 인 `AnyFoodSearchProblem`을 BFS로 풀어서 경로를 얻습니다.
+
+### AnyFoodSearchProblem
+
+```python
+class AnyFoodSearchProblem(PositionSearchProblem):
+    def __init__(self, gameState):
+        self.food = gameState.getFood()
+        self.walls = gameState.getWalls()
+        self.startState = gameState.getPacmanPosition()
+        self.costFn = lambda x: 1
+        # ...
+
+    def isGoalState(self, state):
+        x, y = state
+        return self.food[x][y]  # 음식이 있으면 Goal
+```
+
+---
+
 ### 실행 예시
 
 ```bash
