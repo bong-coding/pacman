@@ -91,9 +91,9 @@ Pacman은 미로를 탐색하여 목표 지점까지 도달해야 하며, 우리
 **클래스**: `FoodSearchProblem`  
 **설명**:
 
-- Pacman이 보드 위의 **모든 음식(점)** 을 먹는 경로를 찾는 문제입니다.
-- 상태(`state`)는 `(pacmanPosition, foodGrid)`로 구성되며, `foodGrid`는 남은 음식의 위치를 `True/False`로 나타냅니다.
-- Goal은 **모든 음식**이 사라진 상태(`foodGrid.count() == 0`)입니다.
+- Pacman이 보드 위의 **모든 음식(점)** 을 먹는 경로를 찾는 문제임임
+- 상태(`state`)는 `(pacmanPosition, foodGrid)`로 구성되며, `foodGrid`는 남은 음식의 위치를 `True/False`로 나타냄냄
+- Goal은 **모든 음식**이 사라진 상태(`foodGrid.count() == 0`)
 
 ### FoodSearchProblem 휴리스틱
 
@@ -113,9 +113,9 @@ Pacman은 미로를 탐색하여 목표 지점까지 도달해야 하며, 우리
 **클래스**: `ClosestDotSearchAgent`  
 **설명**:
 
-- 모든 음식을 먹을 때까지, **“현재에서 가장 가까운 음식”** 으로 가는 경로를 **반복**적으로 탐색해 이동합니다.
+- 모든 음식을 먹을 때까지, **“현재에서 가장 가까운 음식”** 으로 가는 경로를 **반복**적으로 탐색해 이동함
 - 최적(총거리 최소)은 아니지만, 간단히 구현 가능.
-- `findPathToClosestDot`를 통해 **“어떤 음식이든 도착하면 goal”** 인 `AnyFoodSearchProblem`을 BFS로 풀어서 경로를 얻습니다.
+- `findPathToClosestDot`를 통해 **“어떤 음식이든 도착하면 goal”** 인 `AnyFoodSearchProblem`을 BFS로 풀어서 경로를 얻음
 
 ### AnyFoodSearchProblem
 
@@ -130,7 +130,7 @@ class AnyFoodSearchProblem(PositionSearchProblem):
 
     def isGoalState(self, state):
         x, y = state
-        return self.food[x][y]  # 음식이 있으면 Goal
+        return self.food[x][y]
 ```
 
 ---
